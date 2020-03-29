@@ -1,0 +1,70 @@
+<div class="container">
+
+  <h5 class="mb-5 mt-5">Bestaande klant aanpassen</h5>
+
+
+</div>
+
+
+<div class="container">
+  <form>
+    <div *ngIf="(organisation$ | async) as organisation">
+      <input class="form-control" type="hidden" #idvar value="{{organisation.id}}">
+      <div class="form-group row">
+        <label for="inputOrg" class="col-sm-2 col-form-label">Organisatie</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputOrg" #organisationvar value="{{organisation.organisation}}">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputStreet" class="col-sm-2 col-form-label">Straat</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputStreet" #street value="{{organisation.street}}">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputNumber" class="col-sm-2 col-form-label">Nummer</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputNumber" #number value="{{organisation.number}}">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputPostal" class="col-sm-2 col-form-label">Postcode</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputPostal" #postalcode value="{{organisation.postalcode}}">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputCity" class="col-sm-2 col-form-label">Plaats</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputCity" #city value="{{organisation.city}}">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputTax" class="col-sm-2 col-form-label">BTW-nr</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputTax" #btwnr value="{{organisation.btwnr}}">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputAssignment" class="col-sm-2 col-form-label">Laatste opdracht</label>
+        <div class="col-sm-10">
+          <input type="date" class="form-control" id="inputAssignment" #last_assignment
+            value="{{organisation.last_assignment}}">
+        </div>
+      </div>
+      <button class="btn btn-success" (click)="editInput(
+      idvar.value,organisationvar.value,street.value,number.value,postalcode.value,city.value,btwnr.value,last_assignment.value
+    )">Bewaren</button>
+      <button class="btn btn-dark ml-4" (click)="onCancel()">Annuleren</button>
+
+    </div>
+  </form>
+
+</div>

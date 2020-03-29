@@ -1,0 +1,28 @@
+mat-nav-list {
+  background-color:black;
+  height: 700px
+}
+
+.mat-list-item {
+  color: orangered;
+}
+
+mat-sidenav-container {
+  height: 700px;
+
+}
+
+mat-icon {
+  color: black;
+}
+
+
+.flexExpand {
+  flex: 1 1 auto;
+  align-items: center;
+}
+
+.fas {
+  color: black;
+}
+

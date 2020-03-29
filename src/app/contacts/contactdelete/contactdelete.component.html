@@ -1,0 +1,9 @@
+<div class="container">
+  <div *ngIf="(contact$ | async) as contact">
+    <div class="alert alert-danger" role="alert">
+      Bent u zeker dat u <b>{{contact.name}}</b> wilt verwijderen?
+    </div>
+    <button type="submit" class="btn btn-danger mr-4" (click)="onDelete(contact.id)">Verwijderen</button>
+    <button type="submit" class="btn btn-dark" (click)="onCancel()">Annuleren</button>
+  </div>
+</div>

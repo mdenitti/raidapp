@@ -1,0 +1,9 @@
+<div class="container">
+  <div *ngIf="(quote$ | async) as quote">
+    <div class="alert alert-danger" role="alert">
+      Bent u zeker dat u offerte <b>{{quote.quote_number}}</b> wilt verwijderen?
+    </div>
+    <button type="submit" class="btn btn-danger mr-4" (click)="onDelete(quote.id)">Verwijderen</button>
+    <button type="submit" class="btn btn-dark" (click)="onCancel()">Annuleren</button>
+  </div>
+</div>

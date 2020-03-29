@@ -1,0 +1,29 @@
+<div class="container">
+
+  <h5 class="mb-5 mt-5">Bestaand product aanpassen</h5>
+
+
+</div>
+
+
+<div class="container">
+  <form>
+    <div *ngIf="(product$ | async) as product">
+      <input class="form-control" type="hidden" #idvar value="{{product.id}}">
+      <div class="form-group row">
+        <label for="inputName" class="col-sm-2 col-form-label">Item</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputName" #namevar value="{{product.name}}">
+        </div>
+      </div>
+
+      <button class="btn btn-success" (click)="editInput(
+      idvar.value,namevar.value)">Bewaren</button>
+      <button class="btn btn-dark ml-4" (click)="onCancel()">Annuleren</button>
+
+    </div>
+
+
+  </form>
+
+</div>

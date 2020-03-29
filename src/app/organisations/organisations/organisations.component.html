@@ -1,0 +1,97 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Organisatie</th>
+      <th scope="col">Straat</th>
+      <th scope="col">Nummer</th>
+      <th scope="col">Postcode</th>
+      <th scope="col">Stad</th>
+      <th scope="col">BTW nummer</th>
+      <th scope="col">Laatste opdracht</th>
+    </tr>
+  </thead>
+  <tbody id="records">
+    <tr *ngFor="let organisation of organisations$ | async, let i = index">
+      <td>{{organisation.organisation}}</td>
+
+      <td>{{organisation.street}}</td>
+
+      <td>{{organisation.number}}</td>
+
+      <td>{{organisation.postalcode}}</td>
+
+      <td>{{organisation.city}}</td>
+
+      <td>{{organisation.btwnr}}</td>
+
+      <td>
+        <button class="btn"
+          [ngStyle]="{'background-color':getDate(organisation.last_assignment)}">{{organisation.last_assignment}}</button>
+      </td>
+      <td><button class="btn btn-success" (click)="editInput(organisation.id)"><i class="far fa-edit"></i></button></td>
+      <td><button class="btn btn-danger" (click)="deleteInput(organisation.id)"><i
+            class="far fa-trash-alt"></i></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<button type="submit" class="btn btn-primary" (click)="onNew()">Toevoegen</button>
+<br>
+<div class="regentry text-center" *ngIf="showNew">
+  <h4>Nieuwe klant invoeren</h4>
+  <br>
+  <form (ngSubmit)="onSave()">
+    <div class="form-group row">
+      <label for="organisation-input" class="col-2 col-form-label">Organisatie</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="organisation" name="organisation">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="street-input" class="col-2 col-form-label">Straat</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="street" name="street">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="number-input" class="col-2 col-form-label">Nr</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="number" name="number">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="postal-input" class="col-2 col-form-label">Postcode</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="postalcode" name="postalcode">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="city-input" class="col-2 col-form-label">Plaats</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="city" name="city">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="btwnr-input" class="col-2 col-form-label">BTW Nr</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="btwnr" name="btwnr">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="lastassignment-input" class="col-2 col-form-label">Laatste opdracht</label>
+      <div class="col-10">
+        <input class="form-control" type="date" [(ngModel)]="last_assignment" name="lastassignment">
+      </div>
+    </div>
+    <div class="text-right">
+      <button type="submit" class="btn btn-success mr-4" (click)="onSave()">Bewaren</button>
+      <button type="submit" class="btn btn-dark" (click)="onCancel()">Annuleren</button>
+    </div>
+  </form>
+</div>

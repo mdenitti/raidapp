@@ -1,0 +1,58 @@
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card bg-primary p-4 h-100">
+          <div class="card-block">
+            <h4 class="card-title"><i class="fas fa-chart-line"></i></h4>
+            <h5 class="card-subtitle text-white mb-3">Statistieken</h5>
+            <p class="card-text p-y-1">Klik op onderstaande knop om de statistieken te zien.</p>
+            <button class="btn btn-light btn-outline-primary" (click)="toStats()">Statistieken</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-success p-4 h-100">
+          <div class="card-block">
+            <h4 class="card-title"><i class="fas fa-building"></i></h4>
+            <h5 class="card-subtitle text-white mb-3">Klanten: {{organisationsArrLength}}</h5>
+            <p class="card-text p-y-1">Klik op onderstaande knop om de klanten te beheren.</p>
+            <button class="btn btn-light btn-outline-success" (click)="toOrg()">Klanten</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-danger p-4 h-100">
+          <div class="card-block">
+            <h4 class="card-title"><i class="fas fa-address-book"></i></h4>
+            <h5 class="card-subtitle text-white mb-3">Contacten: {{contactsArrLength}}</h5>
+            <p class="card-text p-y-1">Klik op onderstaande knop om de contacten te beheren.</p>
+            <button class="btn btn-light btn-outline-danger" (click)="toContacts()">Contacten</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card bg-warning p-4 h-100">
+          <div class="card-block">
+            <h4 class="card-title"><i class="fas fa-list-ol"></i></h4>
+            <h5 class="card-subtitle text-white mb-3">Producten</h5>
+            <p class="card-text p-y-1">Klik op onderstaande knop om de producten te beheren.</p>
+            <button class="btn btn-light btn-outline-warning" (click)="toProducts()">Producten</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-info p-4 h-100">
+          <div class="card-block">
+            <h4 class="card-title"><i class="fas fa-file-invoice-dollar"></i></h4>
+            <h5 class="card-subtitle text-white mb-3">Offertes</h5>
+            <p class="card-text p-y-1">Klik op onderstaande knop om de offertes te beheren.</p>
+            <button class="btn btn-light btn-outline-info" (click)="toInvoices()">Offertes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

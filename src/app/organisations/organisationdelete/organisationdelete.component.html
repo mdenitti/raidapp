@@ -1,0 +1,9 @@
+<div class="container">
+  <div *ngIf="(organisation$ | async) as organisation">
+    <div class="alert alert-danger" role="alert">
+      Bent u zeker dat u <b>{{organisation.organisation}}</b> wilt verwijderen?
+    </div>
+    <button type="submit" class="btn btn-danger mr-4" (click)="onDelete(organisation.id)">Verwijderen</button>
+    <button type="submit" class="btn btn-dark" (click)="onCancel()">Annuleren</button>
+  </div>
+</div>

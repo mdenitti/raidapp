@@ -1,0 +1,223 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Offerte nummer</th>
+      <th scope="col">Organisatie</th>
+      <th scope="col">Contactpersoon</th>
+      <th scope="col">Product</th>
+      <th scope="col">Po nummer</th>
+      <th scope="col">Prijs</th>
+      <th scope="col">Korting</th>
+      <th scope="col">Transport</th>
+      <th scope="col">Invoice</th>
+      <th scope="col">Verzonden</th>
+      <th scope="col">Opdracht uitgevoerd</th>
+      <th scope="col">Betaald</th>
+    </tr>
+  </thead>
+  <tbody id="records">
+    <tr *ngFor="let quote of quotes$ | async, let i = index">
+      <td>{{quote.quote_number}}</td>
+      <td>{{quote.organisations_id}}</td>
+      <td>{{quote.contacts_id}}</td>
+      <td>{{quote.products_id}}</td>
+      <td>{{quote.po_number}}</td>
+      <td>{{quote.price}}</td>
+      <td>{{quote.discount}}</td>
+      <td>{{quote.transport}}</td>
+      <td>{{quote.invoice}}</td>
+      <td>{{quote.send}}</td>
+      <td>{{quote.serviced}}</td>
+      <td>{{quote.payed}}</td>
+
+
+      <td><button class="btn btn-success" (click)="editInput(quote.id)"><i class="far fa-edit"></i></button></td>
+      <td><button class="btn btn-danger" (click)="deleteInput(quote.id)"><i class="far fa-trash-alt"></i></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<button type="submit" class="btn btn-primary" (click)="onNew()">Toevoegen</button>
+<br>
+<div class="regentry text-center" *ngIf="showNew">
+  <h4>Nieuwe offerte invoeren</h4>
+  <br>
+  <form (ngSubmit)="onSave()">
+    <div class="form-group row">
+      <label for="quotenumber-input" class="col-2 col-form-label">Offerte nummer</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="quotenumber" name="quotenumber">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="organisationsid-input" class="col-2 col-form-label">Organisatie</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="organisationsid" name="organisationsid">
+      </div>
+    </div>
+
+
+    <!-- <div class="form-group row">
+      <label for="organisationsid-input" class="col-sm-2 col-form-label">Organisatie</label>
+      <div class="col-sm-10">
+        <select [(ngModel)]="organisationsid" name="organisationsid">
+          <option value="{{organisation.id}}" *ngFor="let organisation of organisations$ | async">
+            {{organisation.organisation}}</option>
+        </select>
+      </div>
+    </div> -->
+
+
+
+
+    <div class="form-group row">
+      <label for="contactsid-input" class="col-2 col-form-label">Contactpersoon</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="contactsid" name="contactsid">
+      </div>
+    </div>
+
+
+    <!-- <div class="form-group row">
+      <label for="contactsid-input" class="col-sm-2 col-form-label">Contactpersoon</label>
+      <div class="col-sm-10">
+        <select [(ngModel)]="contactsid" name="contactsid">
+          <option value="{{contact.id}}" *ngFor="let contact of contacts$ | async">
+            {{contact.name}}</option>
+        </select>
+      </div>
+    </div> -->
+
+
+    <div class="form-group row">
+      <label for="productid-input" class="col-2 col-form-label">Product</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="productid" name="productid">
+      </div>
+    </div>
+
+    <!-- <div class="form-group row">
+      <label for="productid-input" class="col-sm-2 col-form-label">Product</label>
+      <div class="col-sm-10">
+        <select [(ngModel)]="productid" name="productid">
+          <option value="{{product.id}}" *ngFor="let product of products$ | async">
+            {{product.name}}</option>
+        </select>
+      </div>
+    </div> -->
+
+
+    <div class="form-group row">
+      <label for="ponumber-input" class="col-2 col-form-label">Po nummer</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="ponumber" name="ponumber">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="price-input" class="col-2 col-form-label">Prijs</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="price" name="price">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="discount-input" class="col-2 col-form-label">Korting</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="discount" name="discount">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="transport-input" class="col-2 col-form-label">Transport</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="transport" name="transport">
+      </div>
+    </div>
+
+    <!-- <div class="form-group row">
+      <label for="invoice-input" class="col-2 col-form-label">Invoice</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="invoice" name="invoice">
+      </div>
+    </div> -->
+
+    <div class="form-group row">
+      <div class="col-sm-2">Status offerte:</div>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="invoice" name="invoice">
+          <label class="form-check-label" for="invoice-input">
+            Factuur is gemaakt
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="form-group row">
+      <label for="send-input" class="col-2 col-form-label">Verzonden</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="send" name="send">
+      </div>
+    </div> -->
+
+    <div class="form-group row">
+      <div class="col-sm-2">Status factuur:</div>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="send" name="send">
+          <label class="form-check-label" for="send-input">
+            Factuur is verzonden
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="form-group row">
+      <label for="serviced-input" class="col-2 col-form-label">Opdracht uitgevoerd</label>
+      <div class="col-10">
+        <input class="form-control" type="date" [(ngModel)]="serviced" name="serviced">
+      </div>
+    </div> -->
+
+    <div class="form-group row">
+      <div class="col-sm-2">Status opdracht:</div>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="serviced" name="serviced">
+          <label class="form-check-label" for="serviced-input">
+            Opdracht is uitgevoerd
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="form-group row">
+      <label for="payed-input" class="col-2 col-form-label">Betaald</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="payed" name="payed">
+      </div>
+    </div> -->
+
+    <div class="form-group row">
+      <div class="col-sm-2">Status factuur:</div>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="payed" name="payed">
+          <label class="form-check-label" for="payed-input">
+            Factuur is betaald
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-right">
+      <button type="submit" class="btn btn-success mr-4" (click)="onSave()">Bewaren</button>
+      <button type="submit" class="btn btn-dark" (click)="onCancel()">Annuleren</button>
+    </div>
+  </form>
+</div>
