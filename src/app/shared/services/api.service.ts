@@ -5,7 +5,7 @@ import { Product } from '../model/products.model';
 import { Quote } from '../model/quotes.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -20,15 +20,12 @@ export class ApiService {
   testarray = [];
 
   constructor(private http: HttpClient) { }
+
   getOrganisations(): Observable<Organisation[]> {
     return this.http
       .get<Organisation[]>(this.url + "/organisations")
       .pipe(tap(result => console.log(result)));
-
   }
-
-
-
 
   findOrganisation(id: number): Observable<Organisation> {
     return this.http
@@ -40,9 +37,6 @@ export class ApiService {
           console.log(this.currentOrganisation);
         }))
   }
-
-
-
 
   getContacts(): Observable<Contact[]> {
     return this.http
@@ -61,7 +55,6 @@ export class ApiService {
         }))
   }
 
-
   getQuotes(): Observable<Quote[]> {
     return this.http
       .get<Quote[]>(this.url + "/quotes")
@@ -79,7 +72,6 @@ export class ApiService {
         }))
   }
 
-
   getProducts(): Observable<Product[]> {
     return this.http
       .get<Product[]>(this.url + "/products")
@@ -96,7 +88,6 @@ export class ApiService {
           console.log(this.currentProduct);
         }))
   }
-
 
   addOrganisationJSON(newOrganisationJSON): Observable<any> {
     console.log(newOrganisationJSON);
@@ -128,31 +119,20 @@ export class ApiService {
     return this.http.put(this.url + '/contacts/' + value.id, value, { headers: headers })
   }
 
-
-
-
-
   addQuoteJSON(newQuoteJSON): Observable<any> {
     console.log(newQuoteJSON);
     const headers = new HttpHeaders().set("Content-type", "application/json");
     return this.http.post(this.url + "/quotes", newQuoteJSON, { headers: headers });
   }
 
-
-
   deleteQuote(value) {
     return this.http.delete(this.url + `/quotes/${value}`)
   }
-
-
 
   editQuote(value: Quote): Observable<any> {
     const headers = new HttpHeaders().set('Content-type', 'application/json');
     return this.http.put(this.url + '/quotes/' + value.id, value, { headers: headers })
   }
-
-
-
 
   addProductJSON(newProductJSON): Observable<any> {
     console.log(newProductJSON);
@@ -160,19 +140,13 @@ export class ApiService {
     return this.http.post(this.url + "/products", newProductJSON, { headers: headers });
   }
 
-
-
   deleteProduct(value) {
     return this.http.delete(this.url + `/products/${value}`)
   }
-
-
 
   editProduct(value: Product): Observable<any> {
     const headers = new HttpHeaders().set('Content-type', 'application/json');
     return this.http.put(this.url + '/products/' + value.id, value, { headers: headers })
   }
-
-
 
 }
