@@ -3,7 +3,9 @@ import { AuthService } from '../../shared/services/firebaseauth.service';
 import { Contact } from '../../shared/model/contacts.model';
 import { ApiService } from '../../shared/services/api.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { Observable, combineLatest } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { Organisation } from '../../shared/model/organisations.model';
 
 @Component({
@@ -13,7 +15,11 @@ import { Organisation } from '../../shared/model/organisations.model';
 })
 export class ContactsComponent implements OnInit {
 
+  filter: FormControl;
+  filter$: Observable<string>;
+
   contacts$: Observable<Contact[]>;
+  filteredContacts$: Observable<Contact[]>
   organisations$: Observable<Organisation[]>;
   addContacts$: Observable<Contact[]>;
 
@@ -64,6 +70,13 @@ export class ContactsComponent implements OnInit {
   }
 
   constructor(private ApiService: ApiService, public authService: AuthService, private router: Router) {
+
+    this.contacts$ = this.ApiService.getContacts();
+    this.filter = new FormControl('');
+    this.filter$ = this.filter.valueChanges.pipe(startWith(''));
+    this.filteredContacts$ = combineLatest(this.contacts$, this.filter$)
+      .pipe(map(([contacts, filterString]) => contacts.filter(contact =>
+        contact.name.toLowerCase().indexOf(filterString.toLowerCase()) !== -1)));
 
   }
 

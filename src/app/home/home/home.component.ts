@@ -6,6 +6,7 @@ import { Organisation } from '../../shared/model/organisations.model';
 import { Contact } from '../../shared/model/contacts.model';
 import { Product } from '../../shared/model/products.model';
 import { ApiService } from '../../shared/services/api.service';
+import { AuthService } from '../../shared/services/firebaseauth.service';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
   contactsArrLength: number;
 
 
-  constructor(private ApiService: ApiService, private router: Router) { }
+  constructor(public authService: AuthService, private ApiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
 

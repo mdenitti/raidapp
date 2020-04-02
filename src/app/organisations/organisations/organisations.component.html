@@ -1,3 +1,9 @@
+<form class="mt-2 ml-2">
+  <div class="form-group form-inline">
+    Organisatie zoeken: <input class="form-control ml-2" type="text" [formControl]="filter" />
+  </div>
+</form>
+
 <table class="table">
   <thead>
     <tr>
@@ -11,9 +17,11 @@
     </tr>
   </thead>
   <tbody id="records">
-    <tr *ngFor="let organisation of organisations$ | async, let i = index">
+    <tr *ngFor="let organisation of filteredOrganisations$ | async, let i = index">
       <td>{{organisation.organisation}}</td>
-
+      <!-- <td>
+        <ngb-highlight [result]="organisation.organisation" [term]="filter.value"></ngb-highlight>
+      </td> -->
       <td>{{organisation.street}}</td>
 
       <td>{{organisation.number}}</td>

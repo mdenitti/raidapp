@@ -1,3 +1,9 @@
+<form class="mt-2 ml-2">
+  <div class="form-group form-inline">
+    Contactpersoon zoeken: <input class="form-control ml-2" type="text" [formControl]="filter" />
+  </div>
+</form>
+
 <table class="table">
   <thead>
     <tr>
@@ -9,7 +15,7 @@
     </tr>
   </thead>
   <tbody id="records">
-    <tr *ngFor="let contact of contacts$ | async, let i = index">
+    <tr *ngFor="let contact of filteredContacts$ | async, let i = index">
       <td>{{contact.name}}</td>
       <td>{{contact.telephone}}</td>
       <td>{{contact.mail}}</td>

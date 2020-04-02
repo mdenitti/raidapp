@@ -9,9 +9,12 @@ import { Router } from '@angular/router';
 })
 export class NavigationComponent implements OnInit {
 
+
+
   constructor(public authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+
   }
 
   toHome() {

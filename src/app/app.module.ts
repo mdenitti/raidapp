@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../../src/app/shared/services/api.service';
+import { DecimalPipe } from '@angular/common';
 
 import { RouterModule, Routes } from "@angular/router";
 import { AppRoutingModule } from './core/app.routing.module';
@@ -15,7 +16,9 @@ import { CustomMaterialModule } from "./core/material.module";
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
+import { AuthService } from '../../src/app/shared/services/firebaseauth.service';
 
 import { Organisation } from './shared/model/organisations.model';
 import { Contact } from './shared/model/contacts.model';
@@ -45,10 +48,28 @@ import { ProducteditComponent } from './products/productedit/productedit.compone
 import { ProductdeleteComponent } from './products/productdelete/productdelete.component';
 import { ProductaddComponent } from './products/productadd/productadd.component';
 
+// Required components for which route services to be activated
+import { DashboardComponent } from './authentication/dashboard/dashboard.component';
+import { SignInComponent } from './authentication/sign-in/sign-in.component';
+import { SignUpComponent } from './authentication/sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './authentication/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './authentication/verify-email/verify-email.component';
+
+// Import canActivate guard services
+import { AuthGuard } from "../app/shared/guard/auth.guard";
+import { SecureInnerPagesGuard } from "../app/shared/guard/secure-inner-pages.guard";
+
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'login', data: { title: 'Login Component' }, pathMatch: 'full' },
+  { path: '', redirectTo: 'sign-in', data: { title: 'SignIn Component' }, pathMatch: 'full' },
+  //for authentication
+  { path: 'sign-in', component: SignInComponent, canActivate: [SecureInnerPagesGuard] },
+  { path: 'register-user', component: SignUpComponent, canActivate: [SecureInnerPagesGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] },
+  { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] },
+  //
   { path: 'organisationedit/:id', component: OrganisationeditComponent },
   { path: 'contactedit/:id', component: ContacteditComponent },
   { path: 'organisationdelete/:id', component: OrganisationdeleteComponent },
@@ -113,7 +134,12 @@ const appRoutes: Routes = [
     ProductsComponent,
     ProducteditComponent,
     ProductdeleteComponent,
-    ProductaddComponent
+    ProductaddComponent,
+    DashboardComponent,
+    SignInComponent,
+    SignUpComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent
   ],
   imports: [
     BrowserModule,
@@ -130,8 +156,10 @@ const appRoutes: Routes = [
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule
   ],
-  providers: [ApiService],
+  providers: [ApiService, AuthService, DecimalPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

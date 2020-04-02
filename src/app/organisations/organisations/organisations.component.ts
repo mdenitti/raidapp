@@ -1,16 +1,14 @@
 import { Component, OnInit, PipeTransform } from '@angular/core';
 import { AuthService } from '../../shared/services/firebaseauth.service';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Organisation } from '../../shared/model/organisations.model';
 import { ApiService } from '../../shared/services/api.service';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Router, RouterStateSnapshot } from '@angular/router';
+import { Observable, combineLatest } from 'rxjs';
 import { DecimalPipe } from '@angular/common';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
-
-
-
-
+import { User } from 'src/app/shared/services/user';
 
 
 @Component({
@@ -20,13 +18,18 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class OrganisationsComponent implements OnInit {
 
-
+  user: User;
   itemsArray = [];
   itemsArray2 = [];
   itemsJson;
   closeResult = '';
+  /* filter = new FormControl(''); */
+  filter: FormControl;
+  filter$: Observable<string>;
+  OrgArr = [];
 
   organisations$: Observable<Organisation[]>;
+  filteredOrganisations$: Observable<Organisation[]>
   addOrganisation$: Observable<Organisation[]>;
   showNew: Boolean = false;
   organisation: string;
@@ -39,6 +42,10 @@ export class OrganisationsComponent implements OnInit {
   showEdit: boolean;
   curDate: Date = new Date();
   organisationId: number;
+
+
+
+
 
 
   getDate(lastDate) {
@@ -89,7 +96,20 @@ export class OrganisationsComponent implements OnInit {
     this.router.navigate(['main/organisations']);
   }
 
-  constructor(private ApiService: ApiService, public authService: AuthService, private router: Router) {
+  constructor(private afs: AngularFirestore, private ApiService: ApiService, public authService: AuthService, private router: Router, pipe: DecimalPipe) {
+
+    /* this.organisations$ = this.filter.valueChanges.pipe(
+      startWith(''),
+      map(text => search(text, pipe))
+    ); */
+    this.organisations$ = this.ApiService.getOrganisations();
+    this.filter = new FormControl('');
+    this.filter$ = this.filter.valueChanges.pipe(startWith(''));
+    this.filteredOrganisations$ = combineLatest(this.organisations$, this.filter$)
+      .pipe(map(([organisations, filterString]) => organisations.filter(organisation =>
+        organisation.organisation.toLowerCase().indexOf(filterString.toLowerCase()) !== -1)));
+
+
 
   }
 
@@ -102,6 +122,7 @@ export class OrganisationsComponent implements OnInit {
     this.organisations$ = this.ApiService.getOrganisations();
     console.log(this.organisations$);
 
+
     this.ApiService.getOrganisations().subscribe((res: any[]) => {
       this.itemsArray = res;
       for (let i = 0; i < this.itemsArray.length; i++) {
@@ -111,7 +132,20 @@ export class OrganisationsComponent implements OnInit {
       console.log(this.itemsArray2[0]);
       this.itemsJson = JSON.stringify(this.itemsArray.length);
       console.log(this.itemsJson);
-    })
+    });
+
+
+
+
+    this.ApiService.getOrganisations().subscribe((OrgRes: any[]) => {
+      this.OrgArr = OrgRes;
+      console.log(this.OrgArr);
+    });
+
+
+
+
+
 
 
 

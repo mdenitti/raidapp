@@ -13,8 +13,9 @@
     <span><button (click)="toInv()" class="mat-icon-button"><i class="fas fa-file-invoice-dollar"></i></button></span>
 
 
-    <span *ngIf="authService.isLoggedIn">
-      <button (click)="authService.logout()" class="mat-raised-button">Logout</button>
+    <!-- <span *ngIf="authService.isLoggedIn"> -->
+    <span>
+      <button (click)="authService.SignOut()" class="mat-raised-button">Logout</button>
     </span>
   </mat-toolbar-row>
 </mat-toolbar>
