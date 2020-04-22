@@ -19,19 +19,11 @@
   <tbody id="records">
     <tr *ngFor="let organisation of filteredOrganisations$ | async, let i = index">
       <td>{{organisation.organisation}}</td>
-      <!-- <td>
-        <ngb-highlight [result]="organisation.organisation" [term]="filter.value"></ngb-highlight>
-      </td> -->
       <td>{{organisation.street}}</td>
-
       <td>{{organisation.number}}</td>
-
       <td>{{organisation.postalcode}}</td>
-
       <td>{{organisation.city}}</td>
-
       <td>{{organisation.btwnr}}</td>
-
       <td>
         <button class="btn"
           [ngStyle]="{'background-color':getDate(organisation.last_assignment)}">{{organisation.last_assignment}}</button>

@@ -44,6 +44,12 @@ export class ApiService {
       .pipe(tap(result => console.log(result)));
   }
 
+  getContactsOrg(): Observable<Contact[]> {
+    return this.http
+      .get<Contact[]>(this.url + "/contactsorg")
+      .pipe(tap(result => console.log(result)));
+  }
+
   findContact(id: number): Observable<Contact> {
     return this.http
       .get<Contact>(`${this.url + "/contacts"}/${id}`)
@@ -54,6 +60,17 @@ export class ApiService {
           console.log(this.currentContact);
         }))
   }
+
+  /* findContactOrg(id: number): Observable<Contact> {
+    return this.http
+      .get<Contact>(`${this.url + "/contactsorg"}/${id}`)
+      .pipe(
+        //map(result => result[0]),
+        tap(result => {
+          this.currentContact = result;
+          console.log(this.currentContact);
+        }))
+  } */
 
   getQuotes(): Observable<Quote[]> {
     return this.http
@@ -116,7 +133,7 @@ export class ApiService {
 
   editContact(value: Contact): Observable<any> {
     const headers = new HttpHeaders().set('Content-type', 'application/json');
-    return this.http.put(this.url + '/contacts/' + value.id, value, { headers: headers })
+    return this.http.put(this.url + '/contactsorg/' + value.id, value, { headers: headers })
   }
 
   addQuoteJSON(newQuoteJSON): Observable<any> {

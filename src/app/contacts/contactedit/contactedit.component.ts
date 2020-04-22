@@ -18,10 +18,10 @@ export class ContacteditComponent implements OnInit {
   id: number = this.route.snapshot.params.id;
   contact$: Observable<any>
 
-  editInput(idvar, namevar, telephone, mail, last_contacted) {
-    const updateContact = new Contact(idvar, namevar, telephone, mail, last_contacted);
+  editInput(idvar, namevar, telephone, mail, organisation, last_contacted) {
+    const updateContact = new Contact(idvar, namevar, telephone, mail, organisation, last_contacted);
     this.ApiService.editContact(updateContact).subscribe(
-      (result => { this.ApiService.getContacts() })
+      (result => { this.ApiService.getContactsOrg() })
     )
     this.router.navigate(['main/contactadd']);
   }

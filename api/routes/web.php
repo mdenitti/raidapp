@@ -24,10 +24,13 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
   $router->get('contacts',  ['uses' => 'ContactController@showAllContacts']);
   $router->get('contacts/{id}', ['uses' => 'ContactController@showOneContact']);
+  /* $router->get('contactsorg/{id}', ['uses' => 'ContactController@showOneContactOrg']); */
   $router->get('contactsorg', ['uses' => 'ContactController@showContactOrganisations']);
   $router->post('contacts', ['uses' => 'ContactController@create']);
+  /* $router->post('contactsorg', ['uses' => 'ContactController@updateContactOrganisations']); */
   $router->delete('contacts/{id}', ['uses' => 'ContactController@delete']);
   $router->put('contacts/{id}', ['uses' => 'ContactController@update']);
+  $router->put('contactsorg/{id}', ['uses' => 'ContactController@update']);
 
   $router->get('quotes',  ['uses' => 'QuoteController@showAllQuotes']);
   $router->get('quotes/{id}', ['uses' => 'QuoteController@showOneQuote']);

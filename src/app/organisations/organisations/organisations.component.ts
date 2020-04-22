@@ -74,10 +74,8 @@ export class OrganisationsComponent implements OnInit {
       this.btwnr,
       this.last_assignment
     );
-    console.log(newOrganisationJSON);
     this.ApiService.addOrganisationJSON(newOrganisationJSON).subscribe();
     this.router.navigate(['main/organisationadd']);
-    //sweetalert toevoegen: velden met ngmodel wel eerst leegmaken
   }
 
   logId(orgId) {
@@ -120,7 +118,6 @@ export class OrganisationsComponent implements OnInit {
   ngOnInit(): void {
 
     this.organisations$ = this.ApiService.getOrganisations();
-    console.log(this.organisations$);
 
 
     this.ApiService.getOrganisations().subscribe((res: any[]) => {
@@ -163,8 +160,6 @@ export class OrganisationsComponent implements OnInit {
   onEdit(id) {
     this.ApiService.findOrganisation(id).subscribe();
     this.organisationId = id;
-    console.log(this.organisationId);
-    /* this.router.navigate(['main/edit']); */
   }
 
   editInput(id) {

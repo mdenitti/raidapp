@@ -23,7 +23,7 @@ class Contact extends Model
      */
     protected $hidden = [];
 
-    public function organsisation()
+    public function organsisations()
     {
         return $this->belongsToMany('App\Organisation');
     }

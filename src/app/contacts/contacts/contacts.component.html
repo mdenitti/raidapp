@@ -10,7 +10,7 @@
       <th scope="col">Naam</th>
       <th scope="col">Telefoon</th>
       <th scope="col">Email</th>
-      <!--  <th scope="col">Organisatie</th> -->
+      <th scope="col">Organisatie</th>
       <th scope="col">Laatst gecontacteerd</th>
     </tr>
   </thead>
@@ -19,7 +19,16 @@
       <td>{{contact.name}}</td>
       <td>{{contact.telephone}}</td>
       <td>{{contact.mail}}</td>
-      <!-- <th>Organisatie</th> -->
+      <td>
+        <div *ngFor="let item of contact.organisations | keyvalue">
+          <!-- {{item.key}} - {{item.value}} -->
+          {{item.value.organisation}}
+          <div *ngFor="let item0 of item.value | keyvalue">
+            <!-- {{item0.key}} - {{item0.value}} -->
+            {{item0.value.organisation}}
+          </div>
+        </div>
+      </td>
       <td>
         <button class="btn"
           [ngStyle]="{'background-color':getDate(contact.last_contacted)}">{{contact.last_contacted}}</button>
@@ -60,7 +69,7 @@
     <div class="form-group row">
       <label for="inputOrg" class="col-sm-2 col-form-label">Organisation</label>
       <div class="col-sm-10">
-        <select name="inputOrg">
+        <select name="inputOrg" [(ngModel)]="organisation">
           <option value="{{organisation.id}}" *ngFor="let organisation of organisations$ | async">
             {{organisation.organisation}}</option>
         </select>

@@ -26,10 +26,21 @@ class ContactController extends Controller
         return response()->json($contact, 201);
     }
 
+    public function showContactOrganisations()
+    {
+        return response()->json(Contact::with('organisations')->get());
+    }
+
+    /* public function updateContactOrganisations()
+    {
+        return response()->json(Contact::with('organisations')->post());
+    } */
+
     public function update($id, Request $request)
     {
         $contact = Contact::findOrFail($id);
-        $contact->update($request->all());
+        /* $contact->update($request->all()); */
+        $contact->update($request->all())->organisations()->attach($request->organisation);
 
         return response()->json($contact, 200);
     }

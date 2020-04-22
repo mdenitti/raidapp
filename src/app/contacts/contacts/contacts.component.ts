@@ -27,6 +27,7 @@ export class ContactsComponent implements OnInit {
   name: string;
   telephone: string;
   mail: string;
+  organisation: number;
   last_contacted: Date;
   showEdit: boolean;
   curDate: Date = new Date();
@@ -52,6 +53,7 @@ export class ContactsComponent implements OnInit {
       this.name,
       this.telephone,
       this.mail,
+      this.organisation,
       this.last_contacted
     );
     console.log(newContactJSON);
@@ -71,7 +73,7 @@ export class ContactsComponent implements OnInit {
 
   constructor(private ApiService: ApiService, public authService: AuthService, private router: Router) {
 
-    this.contacts$ = this.ApiService.getContacts();
+    this.contacts$ = this.ApiService.getContactsOrg();
     this.filter = new FormControl('');
     this.filter$ = this.filter.valueChanges.pipe(startWith(''));
     this.filteredContacts$ = combineLatest(this.contacts$, this.filter$)
@@ -84,7 +86,7 @@ export class ContactsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.contacts$ = this.ApiService.getContacts();
+    this.contacts$ = this.ApiService.getContactsOrg();
     this.organisations$ = this.ApiService.getOrganisations();
     /* this.addContacts$ = this.ApiService.AddContacts(); */
   }
