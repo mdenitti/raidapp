@@ -1,10 +1,17 @@
-<div class="contain">
-  <div class="row">
-    <div class="col">
-      <h4>Prijs per offerte</h4>
-      <div *ngIf="chart">
-        <canvas id="canvas" width="200" height="200">{{chart}}</canvas>
-      </div>
-    </div>
+<div class="container">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="line-chart">Line Chart</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/bar-chart">Bar Chart</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/doughnut-chart">Doughnut Chart</a>
+    </li>
+  </ul>
+
+  <div>
+    <router-outlet></router-outlet>
   </div>
 </div>

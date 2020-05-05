@@ -4,7 +4,7 @@ export class Contact {
     public name: string,
     public telephone: string,
     public mail: string,
-    public organisation: number,
+    public organisation_id: number,
     public last_contacted: Date
   ) { }
 }

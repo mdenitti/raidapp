@@ -1,0 +1,17 @@
+<!-- <div class="contain">
+  <div class="row">
+    <div class="col">
+      <h4>Prijs per offerte</h4>
+      <div *ngIf="chart">
+        <canvas id="canvas" width="200" height="200">{{chart}}</canvas>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div>
+  <h4>Prijs per offerte</h4>
+  <div *ngIf="chart" style="display: block;">
+    <canvas id="canvas">{{chart}}</canvas>
+  </div>
+</div>

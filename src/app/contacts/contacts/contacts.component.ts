@@ -27,7 +27,7 @@ export class ContactsComponent implements OnInit {
   name: string;
   telephone: string;
   mail: string;
-  organisation: number;
+  organisation_id: number;
   last_contacted: Date;
   showEdit: boolean;
   curDate: Date = new Date();
@@ -53,7 +53,7 @@ export class ContactsComponent implements OnInit {
       this.name,
       this.telephone,
       this.mail,
-      this.organisation,
+      Number(this.organisation_id),
       this.last_contacted
     );
     console.log(newContactJSON);

@@ -19,9 +19,10 @@ export class ContacteditComponent implements OnInit {
   contact$: Observable<any>
 
   editInput(idvar, namevar, telephone, mail, organisation, last_contacted) {
+    console.log(idvar, namevar, telephone, mail, organisation, last_contacted);
     const updateContact = new Contact(idvar, namevar, telephone, mail, organisation, last_contacted);
     this.ApiService.editContact(updateContact).subscribe(
-      (result => { this.ApiService.getContactsOrg() })
+      (result => { this.ApiService.getContacts() })
     )
     this.router.navigate(['main/contactadd']);
   }

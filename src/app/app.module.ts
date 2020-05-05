@@ -58,6 +58,7 @@ import { VerifyEmailComponent } from './authentication/verify-email/verify-email
 // Import canActivate guard services
 import { AuthGuard } from "../app/shared/guard/auth.guard";
 import { SecureInnerPagesGuard } from "../app/shared/guard/secure-inner-pages.guard";
+import { RaidLineChartComponent } from './charts/raid-line-chart/raid-line-chart.component';
 
 
 
@@ -89,7 +90,11 @@ const appRoutes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
-      { path: 'charts', component: ChartComponent },
+      {
+        path: 'charts', component: ChartComponent, children: [
+          { path: 'line-chart', component: RaidLineChartComponent }
+        ]
+      },
       { path: 'organisations', component: OrganisationsComponent },
       { path: 'contacts', component: ContactsComponent },
       { path: 'products', component: ProductsComponent },
@@ -139,7 +144,8 @@ const appRoutes: Routes = [
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    RaidLineChartComponent
   ],
   imports: [
     BrowserModule,

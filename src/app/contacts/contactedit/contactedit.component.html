@@ -7,7 +7,7 @@
 
 
 <div class="container">
-  <form>
+  <form (ngSubmit)="onSubmit()">
     <div *ngIf="(contact$ | async) as contact">
       <input class="form-control" type="hidden" #idvar value="{{contact.id}}">
       <div class="form-group row">
@@ -48,7 +48,7 @@
             value="{{contact.last_contacted}}">
         </div>
       </div>
-      <button class="btn btn-success" (click)="editInput(
+      <button type="submit" class="btn btn-success" (click)="editInput(
       idvar.value,namevar.value,telephone.value,mail.value,organisation.value,last_contacted.value
     )">Bewaren</button>
       <button class="btn btn-dark ml-4" (click)="onCancel()">Annuleren</button>
