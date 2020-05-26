@@ -21,20 +21,21 @@ class ContactController extends Controller
     public function create(Request $request)
     {
         //dd($request->organisation);
-        $contact = Contact::create($request->all())->organisations()->attach($request->organisation);
+        $contact = Contact::create($request->all())->org()->attach($request->organisation);
 
         return response()->json($contact, 201);
     }
 
     public function showContactOrganisations()
     {
-        return response()->json(Contact::with('organisations')->get());
+        return response()->json(Contact::with('org')->get());
     }
 
     public function update($id, Request $request)
     {
         $contact = Contact::findOrFail($id);
         $contact->update($request->all());
+        $contact->org()->sync($request->organisation_id);
 
         return response()->json($contact, 200);
     }

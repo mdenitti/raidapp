@@ -20,14 +20,9 @@
       <td>{{contact.telephone}}</td>
       <td>{{contact.mail}}</td>
       <td>
-        <div *ngFor="let item of contact.organisations | keyvalue">
-          <!-- {{item.key}} - {{item.value}} -->
-          {{item.value.organisation}}
-          <div *ngFor="let item0 of item.value | keyvalue">
-            <!-- {{item0.key}} - {{item0.value}} -->
-            {{item0.value.organisation}}
-          </div>
-        </div>
+        <div *ngFor="let item of contact.org | keyvalue"> <!-- Massimo ... org is de array-->
+                  {{item.value.organisation}}
+             </div>
       </td>
       <td>
         <button class="btn"

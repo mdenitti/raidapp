@@ -18,13 +18,15 @@ export class ContacteditComponent implements OnInit {
   id: number = this.route.snapshot.params.id;
   contact$: Observable<any>
 
-  editInput(idvar, namevar, telephone, mail, organisation, last_contacted) {
-    console.log(idvar, namevar, telephone, mail, organisation, last_contacted);
-    const updateContact = new Contact(idvar, namevar, telephone, mail, organisation, last_contacted);
+  editInput(idvar, namevar, telephone, mail, organisationid, last_contacted) {
+    console.log(idvar, namevar, telephone, mail, organisationid);
+    const updateContact = new Contact(idvar, namevar, telephone, mail, organisationid, last_contacted);
+    //Massimo -> organisationid meenemen vanuit het edit form via lokale sjabloon var
+    console.log('object naar api details: '+updateContact.organisation_id);
     this.ApiService.editContact(updateContact).subscribe(
       (result => { this.ApiService.getContacts() })
     )
-    this.router.navigate(['main/contactadd']);
+    this.router.navigate(['home']);
   }
 
 
@@ -41,4 +43,3 @@ export class ContacteditComponent implements OnInit {
   }
 
 }
-

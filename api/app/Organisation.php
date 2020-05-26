@@ -12,9 +12,10 @@ class Organisation extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'id', 'organisation', 'street', 'number', 'postalcode', 'city','btwnr','last_assignment'
-    ];
+    // protected $fillable = [
+    //     'id', 'organisation', 'street', 'number', 'postalcode', 'city','btwnr','last_assignment'
+    // ];
+    protected $guarded = [];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -23,7 +24,7 @@ class Organisation extends Model
      */
     protected $hidden = [];
 
-    public function contacts()
+    public function contact()
     {
         return $this->belongsToMany('App\Contact');
     }

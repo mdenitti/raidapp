@@ -87,6 +87,7 @@ export class ContactsComponent implements OnInit {
 
   ngOnInit() {
     this.contacts$ = this.ApiService.getContactsOrg();
+    console.log(this.contacts$);
     this.organisations$ = this.ApiService.getOrganisations();
     /* this.addContacts$ = this.ApiService.AddContacts(); */
   }
